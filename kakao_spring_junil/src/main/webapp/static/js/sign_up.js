@@ -16,34 +16,56 @@ var signUpData = {
 item_ip[0].onkeypress = () => {
 	if(window.event.keyCode == 13){
 		window.event.preventDefault();
-		emailNext(0);
+		next(0);
 	}
 }
 
 btn_g[0].onclick = () => {
-	emailNext(0);
+	next(0);
 }
 
-function emailNext(indexNUmber) {
+item_ip[1].onkeypress = () => {
+	if(window.event.keyCode == 13){
+		window.event.preventDefault();
+		next(1);
+	}
+}
+
+btn_g[1].onclick = () => {
+	next(1);
+}
+
+item_ip[2].onkeypress = () => {
+	if(window.event.keyCode == 13){
+		window.event.preventDefault();
+		next(2);
+	}
+}
+
+btn_g[2].onclick = () => {
+	next(2);
+}
+
+function next(indexNumber) {
 	const msg1 = document.querySelectorAll('.msg1');
 	const msg2 = document.querySelectorAll('.msg2');
-	msg1[indexNUmber].style.display = 'none';
-	msg2[indexNUmber].style.display = 'none';
-	if(item_ip[indexNUmber].value.length == 0){
-		msg1[indexNUmber].style.display = 'block';
-	} else {
+	msg1[indexNumber].style.display = 'none';
+	msg2[indexNumber].style.display = 'none';
+	if(item_ip[indexNumber].value.length == 0){
+		msg1[indexNumber].style.display = 'block';
+	} else if(indexNumber == 0) {
 		$.ajax({
 			type: "post",
 			url: "sign-up-emailCheck",
 			data: {
-				signUpEmail: item_ip[indexNUmber].value
+				signUpEmail: item_ip[indexNumber].value
 			},
 			dataType: "text",
 			success: function(data){
 				signUpData = JSON.parse(data);
 				if(signUpData.emailFlag == 0){
-					warp_form[indexNUmber].style.display = 'none';
-					warp_form[indexNUmber+1].style.display = 'block';
+					warp_form[indexNumber].style.display = 'none';
+					warp_form[indexNumber+1].style.display = 'block';
 				}else if(signUpData.emailFlag == 1){
 					const false_email = document.querySelector('#false_email');
 					while(false_email.hasChildNodes()){
@@ -51,25 +73,30 @@ function emailNext(indexNUmber) {
 					}
 					const emailTextNode = document.createTextNode(signUpData.signUpEmail);
 					false_email.appendChild(emailTextNode);
-					msg2[indexNUmber].style.display = 'block';
+					msg2[indexNumber].style.display = 'block';
 				}
 			},
 			error:function(){
 				alert('비동기 처리 오류!');
 			}
 		})
+	} else if(indexNumber == 1) {
+		let checkFlag = checkPassword(signUpData.signUpEmail, item_ip[indexNumber].value, msg2[indexNumber]);
+		if(checkFlag == true) {
+			warp_form[indexNumber].style.display = 'none';
+			warp_form[indexNumber+1].style.display = 'block';
+		}else {
+			msg2[indexNumber].style.display = 'block';
+		}
+	} else if(indexNumber == 2) {
+		if(item_ip[1].value == item_ip[2].value){
+			signUpData.signUpPassword = item_ip[2].value;
+			warp_form[indexNumber].style.display = 'none';
+			warp_form[indexNumber+1].style.display = 'block';
+		}else{
+			msg2[indexNumber].style.display = 'block';
+		}
 	}
-}
-
-item_ip[1].onkeypress = () => {
-	if(window.event.keyCode == 13){
-		window.event.preventDefault();
-		passwordNext(1);
-	}
-}
-
-btn_g[1].onclick = () => {
-	passwordNext(1);
 }
 
 function checkPassword(id, password, msg2){
@@ -110,19 +137,4 @@ function checkPassword(id, password, msg2){
     
 }
 
-function passwordNext(indexNUmber) {
-	const msg1 = document.querySelectorAll('.msg1');
-	const msg2 = document.querySelectorAll('.msg2');
-	msg1[indexNUmber].style.display = 'none';
-	msg2[indexNUmber].style.display = 'none';
-	if(item_ip[indexNUmber].value.length == 0){
-		msg1[indexNUmber].style.display = 'block';
-	} else {
-		let checkFlag = checkPassword(signUpData.signUpEmail, item_ip[indexNUmber].value, msg2[indexNUmber]);
-		if(checkFlag == true) {
-			
-		}else {
-			msg2[indexNUmber].style.display = 'block';
-		}
-	}
-}
+
