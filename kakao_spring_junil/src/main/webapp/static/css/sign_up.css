@@ -88,10 +88,6 @@ progress {
 }
 
 .item_msg .msg3 {
-	display: none;
-}
-
-.item_msg .msg4 {
 	color: green;
 	display: none;
 }

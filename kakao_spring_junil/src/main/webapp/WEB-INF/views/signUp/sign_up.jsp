@@ -82,6 +82,7 @@
                     </div>
                     <div class="item_msg">
                     	<span class="msg1">필수 항목입니다.</span>
+                    	<span class="msg2"></span>
                     </div>
                     <div class="confirm_btn">
                         <button type="button" class="btn_g">다음</button>
@@ -101,9 +102,8 @@
                     </div>
                     <div class="item_msg">
                     	<span class="msg1">필수 항목입니다.</span>
-                    	<span class="msg2">이미 가입된 연락처 입니다.</span>
-                    	<span class="msg3">인증실패. 연락처를 다시 확인해 주세요.</span>
-                    	<span class="msg4">인증성공.</span>
+                    	<span class="msg2"></span>
+                    	<span class="msg3">인증성공.</span>
                     </div>
                     <div class="confirm_btn">
                         <button type="button" class="btn_g">마침</button>

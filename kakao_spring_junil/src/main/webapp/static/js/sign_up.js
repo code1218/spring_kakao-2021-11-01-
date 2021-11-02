@@ -1,8 +1,9 @@
 const warp_form = document.querySelectorAll('.warp_form');
-warp_form[0].style.display = 'block';
-
 const item_ip = document.querySelectorAll('.item_ip');
+const button_round = document.querySelector('.button_round');
 const btn_g = document.querySelectorAll('.btn_g');
+
+warp_form[0].style.display = 'block';
 
 var signUpData = {
 	signUpEmail: '',
@@ -23,6 +24,52 @@ for(let i = 0; i < item_ip.length; i++){
 	btn_g[i].onclick = () => {
 		next(i);
 	}
+}
+
+button_round.onclick = () => {
+	let indexNumber = 4;
+	const msg1 = document.querySelectorAll('.msg1');
+	const msg2 = document.querySelectorAll('.msg2');
+	const msg3 = document.querySelector('.msg3');
+	msg1[indexNumber].style.display = 'none';
+	msg2[indexNumber].style.display = 'none';
+	msg3.style.display = 'none';
+	if(item_ip[indexNumber].value.length == 0){
+		msg1[indexNumber].style.display = 'block';
+	}else {
+		signUpData.signUpPhone = item_ip[indexNumber].value;
+		$.ajax({
+			type: "post",
+			url: "phone-number-check",
+			data: JSON.stringify(signUpData),
+			dataType: "text",
+			contentType: "application/json;charset=UTF-8",
+			success: function(data) {
+				signUpData = JSON.parse(data);
+				if(signUpData.phoneFlag == 1){
+					msg3.style.display = 'block';
+				}else if(signUpData.phoneFlag == 0){
+					while(msg2[indexNumber].hasChildNodes()){
+						msg2[indexNumber].removeChild(msg2[indexNumber].firstChild);
+					}
+					const error_text = document.createTextNode('인증실패. 연락처를 다시 확인해 주세요.');
+					msg2[indexNumber].appendChild(error_text);
+					msg2[indexNumber].style.display = 'block';
+				}else if(signUpData.phoneFlag == 2){
+					while(msg2[indexNumber].hasChildNodes()){
+						msg2[indexNumber].removeChild(msg2[indexNumber].firstChild);
+					}
+					const error_text = document.createTextNode('이미 가입된 연락처 입니다.');
+					msg2[indexNumber].appendChild(error_text);
+					msg2[indexNumber].style.display = 'block';
+				}
+			},
+			error: function() {
+				alert('비동기 처리 실패!');
+			}
+		})
+	}
+	
 }
 
 
@@ -81,7 +128,16 @@ function next(indexNumber) {
 		warp_form[indexNumber].style.display = 'none';
 		warp_form[indexNumber+1].style.display = 'block';
 	} else if(indexNumber == 4) {
-		
+		if(signUpData.phoneFlag != 1){
+			while(msg2[indexNumber].hasChildNodes()){
+				msg2[indexNumber].removeChild(msg2[indexNumber].firstChild);
+			}
+			const error_text = document.createTextNode('전화번호 인증이 되지 않았습니다.');
+			msg2[indexNumber].appendChild(error_text);
+			msg2[indexNumber].style.display = 'block';
+		}else{
+			
+		}
 	}
 }
 
