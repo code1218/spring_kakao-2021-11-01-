@@ -23,4 +23,9 @@ public class UserDaoImpl implements UserDao {
 	public int phoneCheck(SignUpVo signUpVo) {
 		return session.selectOne(NAME_SPACE + "phoneCheck", signUpVo);
 	}
+	
+	@Override
+	public int signUp(SignUpVo signUpVo) {
+		return session.insert(NAME_SPACE + "signUp", signUpVo);
+	}
 }

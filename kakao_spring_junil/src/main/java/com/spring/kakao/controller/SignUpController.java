@@ -39,6 +39,12 @@ public class SignUpController {
 		signUpVo.setPhoneFlag(userService.signUpPhoneCheck(signUpVo));
 		return signUpVo;
 	}
+	
+	@ResponseBody
+	@RequestMapping(value = "/sign-up", method = RequestMethod.POST)
+	public String signUp(@RequestBody SignUpVo signUpVo) {
+		return Integer.toString(userService.signUp(signUpVo));
+	}
 }
 
 

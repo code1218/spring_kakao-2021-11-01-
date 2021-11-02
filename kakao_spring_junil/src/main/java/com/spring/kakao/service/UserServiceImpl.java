@@ -21,4 +21,9 @@ public class UserServiceImpl implements UserService{
 	public int signUpPhoneCheck(SignUpVo signUpVo) {
 		return userDao.phoneCheck(signUpVo);
 	}
+	
+	@Override
+	public int signUp(SignUpVo signUpVo) {
+		return userDao.signUp(signUpVo);
+	}
 }

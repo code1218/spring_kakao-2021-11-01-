@@ -4,7 +4,7 @@ const button_round = document.querySelector('.button_round');
 const btn_g = document.querySelectorAll('.btn_g');
 
 warp_form[0].style.display = 'block';
-
+item_ip[0].focus();
 var signUpData = {
 	signUpEmail: '',
 	emailFlag: 0,
@@ -72,12 +72,19 @@ button_round.onclick = () => {
 	
 }
 
+function nextPage(indexNumber){
+	warp_form[indexNumber].style.display = 'none';
+	warp_form[indexNumber+1].style.display = 'block';
+	item_ip[indexNumber+1].focus();
+}
 
 function next(indexNumber) {
 	const msg1 = document.querySelectorAll('.msg1');
 	const msg2 = document.querySelectorAll('.msg2');
+	const msg3 = document.querySelector('.msg3');
 	msg1[indexNumber].style.display = 'none';
 	msg2[indexNumber].style.display = 'none';
+	msg3.style.display = 'none';
 	if(item_ip[indexNumber].value.length == 0){
 		msg1[indexNumber].style.display = 'block';
 	} else if(indexNumber == 0) {
@@ -91,8 +98,7 @@ function next(indexNumber) {
 			success: function(data){
 				signUpData = JSON.parse(data);
 				if(signUpData.emailFlag == 0){
-					warp_form[indexNumber].style.display = 'none';
-					warp_form[indexNumber+1].style.display = 'block';
+					nextPage(indexNumber);
 				}else if(signUpData.emailFlag == 1){
 					const false_email = document.querySelector('#false_email');
 					while(false_email.hasChildNodes()){
@@ -110,23 +116,20 @@ function next(indexNumber) {
 	} else if(indexNumber == 1) {
 		let checkFlag = checkPassword(signUpData.signUpEmail, item_ip[indexNumber].value, msg2[indexNumber]);
 		if(checkFlag == true) {
-			warp_form[indexNumber].style.display = 'none';
-			warp_form[indexNumber+1].style.display = 'block';
+			nextPage(indexNumber);
 		}else {
 			msg2[indexNumber].style.display = 'block';
 		}
 	} else if(indexNumber == 2) {
 		if(item_ip[1].value == item_ip[2].value){
 			signUpData.signUpPassword = item_ip[2].value;
-			warp_form[indexNumber].style.display = 'none';
-			warp_form[indexNumber+1].style.display = 'block';
+			nextPage(indexNumber);
 		}else{
 			msg2[indexNumber].style.display = 'block';
 		}
 	} else if(indexNumber == 3) {
 		signUpData.signUpName = item_ip[indexNumber].value;
-		warp_form[indexNumber].style.display = 'none';
-		warp_form[indexNumber+1].style.display = 'block';
+		nextPage(indexNumber);
 	} else if(indexNumber == 4) {
 		if(signUpData.phoneFlag != 1){
 			while(msg2[indexNumber].hasChildNodes()){
@@ -136,7 +139,34 @@ function next(indexNumber) {
 			msg2[indexNumber].appendChild(error_text);
 			msg2[indexNumber].style.display = 'block';
 		}else{
-			
+			if(signUpData.signUpPhone == item_ip[indexNumber].value){
+				$.ajax({
+					type: "post",
+					url: "sign-up",
+					data: JSON.stringify(signUpData),
+					contentType: "application/json;charset=UTF8",
+					dataType: "text",
+					success: function(data){
+						if(data == 1){
+							alert('회원가입을 축하합니다. 환영합니다.');
+							location.replace('sign-in');
+						}else{
+							alert('회원가입 실패. 다시 시도하세요.')
+							location.replace('sign-up');
+						}
+					},
+					error: function(){
+						alert('비동기 처리 실패!');
+					}
+				})
+			}else {
+				while(msg2[indexNumber].hasChildNodes()){
+				msg2[indexNumber].removeChild(msg2[indexNumber].firstChild);
+				}
+				const error_text = document.createTextNode('전화번호 인증이 되지 않았습니다.');
+				msg2[indexNumber].appendChild(error_text);
+				msg2[indexNumber].style.display = 'block';
+			}
 		}
 	}
 }

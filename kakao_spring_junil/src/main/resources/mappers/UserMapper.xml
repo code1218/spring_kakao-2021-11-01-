@@ -23,6 +23,19 @@
 			pm.phone_number = #{signUpPhone}
 			and pm.phone_user_name = #{signUpName}
 	</select>
+	
+	<insert id="signUp" parameterType="com.spring.kakao.model.json.SignUpVo">
+		insert into
+			user_mst
+		values(
+			#{signUpEmail},
+			#{signUpPassword},
+			#{signUpName},
+			#{signUpPhone},
+			now(),
+			now()
+		)
+	</insert>
 </mapper>
 
 
