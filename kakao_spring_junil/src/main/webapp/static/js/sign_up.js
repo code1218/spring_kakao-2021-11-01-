@@ -13,38 +13,18 @@ var signUpData = {
 	phoneFlag: 0
 }
 
-item_ip[0].onkeypress = () => {
-	if(window.event.keyCode == 13){
-		window.event.preventDefault();
-		next(0);
+for(let i = 0; i < item_ip.length; i++){
+	item_ip[i].onkeypress = () => {
+		if(window.event.keyCode == 13){
+			window.event.preventDefault();
+			next(i);
+		}
+	}
+	btn_g[i].onclick = () => {
+		next(i);
 	}
 }
 
-btn_g[0].onclick = () => {
-	next(0);
-}
-
-item_ip[1].onkeypress = () => {
-	if(window.event.keyCode == 13){
-		window.event.preventDefault();
-		next(1);
-	}
-}
-
-btn_g[1].onclick = () => {
-	next(1);
-}
-
-item_ip[2].onkeypress = () => {
-	if(window.event.keyCode == 13){
-		window.event.preventDefault();
-		next(2);
-	}
-}
-
-btn_g[2].onclick = () => {
-	next(2);
-}
 
 function next(indexNumber) {
 	const msg1 = document.querySelectorAll('.msg1');
@@ -96,6 +76,12 @@ function next(indexNumber) {
 		}else{
 			msg2[indexNumber].style.display = 'block';
 		}
+	} else if(indexNumber == 3) {
+		signUpData.signUpName = item_ip[indexNumber].value;
+		warp_form[indexNumber].style.display = 'none';
+		warp_form[indexNumber+1].style.display = 'block';
+	} else if(indexNumber == 4) {
+		
 	}
 }
 
