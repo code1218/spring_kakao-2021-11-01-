@@ -53,7 +53,6 @@
 	            	</div>
            		</c:if>
             	 -->
-            	<!-- 
 				<ul>
 					<a href="notice?notice-page=${pages[1] - 1 eq 0 ? 1 : pages[1] - 1 }"><li><i class="fas fa-arrow-circle-left"></i></li></a>
 					
@@ -63,7 +62,6 @@
 					
 					<a href="notice?notice-page=${pages[2] eq pages[0] ? pages[2] : pages[2] + 1 }"><li><i class="fas fa-arrow-circle-right"></i></li></a>
 				</ul>
-				 -->
             </div>
             
         </main>

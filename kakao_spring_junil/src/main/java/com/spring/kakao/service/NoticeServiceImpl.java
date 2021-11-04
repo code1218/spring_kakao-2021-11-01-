@@ -19,7 +19,11 @@ public class NoticeServiceImpl implements NoticeService {
 	private NoticeBean noticeBean;
 	private List<NoticeDto> noticeListAll;
 	
-	
+	@Override
+	public NoticeBean getNoticeBean() {
+		return noticeBean;
+	}
+
 	@Override
 	public int parseIntPageNumber(String pageNumber) {
 		return Integer.parseInt(pageNumber);

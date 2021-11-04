@@ -19,6 +19,7 @@ public class NoticeController {
 	public ModelAndView noticeIndex(@RequestParam String pageNumber) {
 		ModelAndView mav = new ModelAndView("notice/notice");
 		mav.addObject("noticeList", noticeService.getNoticeList(noticeService.parseIntPageNumber(pageNumber)));
+		mav.addObject("noticeBean", noticeService.getNoticeBean());
 		return mav;
 	}
 }
