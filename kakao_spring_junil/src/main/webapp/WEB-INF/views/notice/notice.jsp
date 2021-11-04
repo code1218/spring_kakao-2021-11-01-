@@ -54,13 +54,13 @@
            		</c:if>
             	 -->
 				<ul>
-					<a href="notice?notice-page=${pages[1] - 1 eq 0 ? 1 : pages[1] - 1 }"><li><i class="fas fa-arrow-circle-left"></i></li></a>
+					<a href="notice?pageNumber=${noticeBean.startPage - 1 eq 0 ? 1 : noticeBean.pageNumber - 1 }"><li><i class="fas fa-arrow-circle-left"></i></li></a>
 					
-					<c:forEach var="i" begin="${pages[1] }" end="${pages[2] }">
-						<a href="notice?notice-page=${i }"><li>${i }</li></a>
+					<c:forEach var="i" begin="${noticeBean.startPage }" end="${noticeBean.endPage }">
+						<a href="notice?pageNumber=${i }"><li>${i }</li></a>
 					</c:forEach>
 					
-					<a href="notice?notice-page=${pages[2] eq pages[0] ? pages[2] : pages[2] + 1 }"><li><i class="fas fa-arrow-circle-right"></i></li></a>
+					<a href="notice?pageNumber=${noticeBean.totalPage eq noticeBean.pageNumber ? noticeBean.totalPage : noticeBean.pageNumber + 1 }"><li><i class="fas fa-arrow-circle-right"></i></li></a>
 				</ul>
             </div>
             

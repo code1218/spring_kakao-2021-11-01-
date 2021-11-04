@@ -19,6 +19,17 @@ public class NoticeServiceImpl implements NoticeService {
 	private NoticeBean noticeBean;
 	private List<NoticeDto> noticeListAll;
 	
+	public void setNoticeBean(int pageNumber) {
+		noticeBean = new NoticeBean();
+		noticeBean.setNoticeTotalCount(noticeListAll.size());
+		noticeBean.setPageNumber(pageNumber);
+		noticeBean.setStartIndex();
+		noticeBean.setEndIndex();
+		noticeBean.setTotalPage();
+		noticeBean.setStartPage();
+		noticeBean.setEndPage();
+	}
+	
 	@Override
 	public NoticeBean getNoticeBean() {
 		return noticeBean;
@@ -31,10 +42,7 @@ public class NoticeServiceImpl implements NoticeService {
 	
 	@Override
 	public List<NoticeDto> getNoticeListAll() {
-		List<NoticeDto> noticeListAll = noticeDao.getNoticeListAll();
-		noticeBean = new NoticeBean();
-		noticeBean.setNoticeTotalCount(noticeListAll.size());
-		return noticeListAll;
+		return noticeDao.getNoticeListAll();
 	}
 	
 	@Override
@@ -42,8 +50,7 @@ public class NoticeServiceImpl implements NoticeService {
 		noticeListAll = getNoticeListAll();
 		List<NoticeDto> noticeList = new ArrayList<NoticeDto>();
 		
-		noticeBean.setStartIndex(pageNumber);
-		noticeBean.setEndIndex(pageNumber);
+		setNoticeBean(pageNumber);
 		
 		for(int i = noticeBean.getStartIndex(); i < noticeBean.getEndIndex() && i < noticeBean.getNoticeTotalCount(); i++) {
 			noticeList.add(noticeListAll.get(i));

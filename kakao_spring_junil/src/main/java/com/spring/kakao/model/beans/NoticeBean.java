@@ -24,32 +24,32 @@ public class NoticeBean {
 	public int getStartIndex() {
 		return startIndex;
 	}
-	public void setStartIndex(int pageNumber) {
-		this.startIndex = (pageNumber-1) * 20;
+	public void setStartIndex() {
+		this.startIndex = (this.pageNumber-1) * 20;
 	}
 	public int getEndIndex() {
 		return endIndex;
 	}
-	public void setEndIndex(int pageNumber) {
-		this.endIndex = pageNumber * 20;
+	public void setEndIndex() {
+		this.endIndex = this.pageNumber * 20;
 	}
 	public int getTotalPage() {
 		return totalPage;
 	}
-	public void setTotalPage(int totalPage) {
-		this.totalPage = totalPage;
+	public void setTotalPage() {
+		this.totalPage = this.noticeTotalCount%20 == 0 ? this.noticeTotalCount/20 : this.noticeTotalCount/20 + 1;
 	}
 	public int getStartPage() {
 		return startPage;
 	}
-	public void setStartPage(int startPage) {
-		this.startPage = startPage;
+	public void setStartPage() {
+		this.startPage = this.pageNumber%5 == 0 ? this.pageNumber - 4 : this.pageNumber - (this.pageNumber%5) + 1;
 	}
 	public int getEndPage() {
 		return endPage;
 	}
-	public void setEndPage(int endPage) {
-		this.endPage = endPage;
+	public void setEndPage() {
+		this.endPage = this.startPage + 4 <= this.totalPage ? this.startPage + 4 : this.totalPage;
 	}
 	
 	@Override
