@@ -4,6 +4,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.spring.kakao.model.dao.UserDao;
+import com.spring.kakao.model.dto.UserDto;
+import com.spring.kakao.model.json.SignInVo;
 import com.spring.kakao.model.json.SignUpVo;
 
 @Service
@@ -25,5 +27,15 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public int signUp(SignUpVo signUpVo) {
 		return userDao.signUp(signUpVo);
+	}
+	
+	@Override
+	public int signIn(SignInVo signInVo) {
+		return userDao.signIn(signInVo);
+	}
+	
+	@Override
+	public UserDto getUser(String user_email) {
+		return userDao.getUser(user_email);
 	}
 }

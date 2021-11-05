@@ -36,6 +36,28 @@
 			now()
 		)
 	</insert>
+	
+	<select id="signIn" parameterType="com.spring.kakao.model.json.SignInVo" resultType="Integer">
+		select
+			count(um.user_email) + count(ud.user_password)
+		from
+			user_mst um
+			left outer join user_mst ud on(ud.user_email = um.user_email and ud.user_password = #{user_password})
+		where
+			um.user_email = #{user_email};
+	</select>
+	
+	<select id="getUser" resultType="com.spring.kakao.model.dto.UserDto">
+		select
+			user_email,
+			user_password,
+			user_name,
+			user_phone
+		from
+			user_mst
+		where
+			user_email = #{user_email};	
+	</select>
 </mapper>
 
 
