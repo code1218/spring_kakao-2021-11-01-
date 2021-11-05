@@ -43,16 +43,11 @@
             </div>
             
             <div class="notice_footer">
-            	<!-- 
-            	<c:set var="admin_id" value="admin"></c:set>
-            	<c:set var="admin_user" value="${login_user.id }"></c:set>
-            	
-           		<c:if test="${admin_id eq admin_user }">
+           		<c:if test="${not empty login_user }">
            			<div class="notice_insert_div">
 	            		<button type="button" class="notice_insert_button" onclick="location.href='notice-insert'">글쓰기</button>
 	            	</div>
            		</c:if>
-            	 -->
 				<ul>
 					<a href="notice?pageNumber=${noticeBean.startPage - 1 eq 0 ? 1 : noticeBean.pageNumber - 1 }"><li><i class="fas fa-arrow-circle-left"></i></li></a>
 					

@@ -6,6 +6,7 @@ import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -40,5 +41,11 @@ public class NoticeController {
 		mav.addObject("noticeList", noticeService.getNoticeList(noticeService.parseIntPageNumber(pageNumber)));
 		mav.addObject("noticeBean", noticeService.getNoticeBean());
 		return mav;
+	}
+	
+	@RequestMapping(value = "notice-insert", method = RequestMethod.GET)
+	public String noticeInsertIndex(Model model, HttpServletRequest request) {
+		
+		return "notice/notice_insert";
 	}
 }
