@@ -92,6 +92,7 @@ function signInSubmit(){
 			//로그인 성공
 			else if(signInData.signInFlag == 2){
 				alert('로그인 성공!');
+				location.replace('index');
 			}
 		},
 		error: function(){

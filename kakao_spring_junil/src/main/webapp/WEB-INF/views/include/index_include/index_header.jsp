@@ -21,7 +21,7 @@
         	</c:when>
         	<c:otherwise>
         		<ul class="nav_user">
-		            <a href="mypage"><li><i class="fas fa-user-circle"></i> ${login_user.id }<span>${emailAddress }</span></li></a>
+		            <a href="mypage"><li><i class="fas fa-user-circle"></i> ${login_user.user_email }<span>${emailAddress }</span></li></a>
 		            <a href="logout"><li><i class="fas fa-sign-out-alt"></i></li></a>
 		        </ul>
         	</c:otherwise>

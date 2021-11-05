@@ -1,5 +1,7 @@
 package com.spring.kakao.service;
 
+import javax.servlet.http.Cookie;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -37,5 +39,12 @@ public class UserServiceImpl implements UserService{
 	@Override
 	public UserDto getUser(String user_email) {
 		return userDao.getUser(user_email);
+	}
+	
+	@Override
+	public Cookie setUserCookie(String user_email) {
+		Cookie cookie_email = new Cookie("user_email", user_email);
+		cookie_email.setMaxAge(60*60*24);
+		return cookie_email;
 	}
 }
