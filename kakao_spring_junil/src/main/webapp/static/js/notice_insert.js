@@ -1,13 +1,13 @@
 const notice_submit = document.querySelector(".notice_submit");
 const insert_form = document.querySelector('#insert_form');
 
-var formData = new FormData(insert_form);
-
 function noticeInsert(){
+	let formData = new FormData(insert_form);
+
 	$.ajax({
 		type: "post",
 		url: "notice-insert",
-		encType: "multipart/form-data",
+		enctype: "multipart/form-data",
 		data: formData,
 		processData: false,
 		contentType: false,
@@ -17,7 +17,6 @@ function noticeInsert(){
 		error: function(){
 			alert("전송 실패");
 		}
-		
 	})
 }
 
