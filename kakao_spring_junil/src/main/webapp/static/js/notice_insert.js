@@ -1,4 +1,26 @@
 const notice_submit = document.querySelector(".notice_submit");
+const insert_form = document.querySelector('#insert_form');
+
+var formData = new FormData(insert_form);
+
+function noticeInsert(){
+	$.ajax({
+		type: "post",
+		url: "notice-insert",
+		encType: "multipart/form-data",
+		data: formData,
+		processData: false,
+		contentType: false,
+		success: function(data){
+			alert("전송 성공");
+		},
+		error: function(){
+			alert("전송 실패");
+		}
+		
+	})
+}
+
 
 notice_submit.onclick = () => {
 	const notice_title = document.querySelector(".notice_title");
@@ -11,7 +33,6 @@ notice_submit.onclick = () => {
 	}else if(notice_content.value.length == 0){
 		alert("공지사항 내용을 입력해 주세요.");
 	}else {
-		const notice_form = document.querySelector("form");
-		notice_form.submit();
+		noticeInsert();
 	}
 }

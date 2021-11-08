@@ -1,5 +1,7 @@
 package com.spring.kakao.controller;
 
+import java.util.Date;
+
 import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,8 +12,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.kakao.model.dto.NoticeInsertDto;
 import com.spring.kakao.model.dto.UserDto;
 import com.spring.kakao.service.NoticeService;
 import com.spring.kakao.service.UserService;
@@ -45,11 +49,22 @@ public class NoticeController {
 	
 	@RequestMapping(value = "notice-insert", method = RequestMethod.GET)
 	public String noticeInsertIndex(Model model, HttpServletRequest request) {
+		Date date = new Date();
+		model.addAttribute("now", date);
 		return "notice/notice_insert";
 	}
 	
-	public String noticeInsert(Model model) {
-		
-		return "redirect:notice?pageNumber=1";
+	@ResponseBody
+	@RequestMapping(value = "notice-insert", method = RequestMethod.POST)
+	public String noticeInsert(NoticeInsertDto noticeInsertDto) {
+		System.out.println(noticeInsertDto);
+		return "1";
 	}
 }
+
+
+
+
+
+
+
