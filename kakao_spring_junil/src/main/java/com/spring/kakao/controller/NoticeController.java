@@ -58,6 +58,7 @@ public class NoticeController {
 	@RequestMapping(value = "notice-insert", method = RequestMethod.POST)
 	public String noticeInsert(NoticeInsertDto noticeInsertDto) {
 		System.out.println(noticeInsertDto);
+		noticeService.fileUpload(noticeInsertDto);
 		return "1";
 	}
 }
