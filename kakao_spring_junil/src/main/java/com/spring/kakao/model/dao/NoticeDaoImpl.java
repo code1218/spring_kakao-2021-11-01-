@@ -20,4 +20,19 @@ public class NoticeDaoImpl implements NoticeDao {
 	public List<NoticeDto> getNoticeListAll() {
 		return session.selectList(NAME_SPACE + "getNoticeListAll");
 	}
+	
+	@Override
+	public int getNoticeMaxCode() {
+		return session.selectOne(NAME_SPACE + "getNoticeMaxCode");
+	}
+	
+	@Override
+	public int noticeMstInsert(NoticeDto noticeDto) {
+		return session.insert(NAME_SPACE + "noticeMstInsert", noticeDto);
+	}
+	
+	@Override
+	public int noticeDtlInsert(NoticeDto noticeDto) {
+		return session.insert(NAME_SPACE + "noticeDtlInsert", noticeDto);
+	}
 }

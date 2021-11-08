@@ -70,7 +70,7 @@ public class NoticeServiceImpl implements NoticeService {
 	}
 	
 	@Override
-	public int fileUpload(NoticeInsertDto noticeInsertDto) {
+	public NoticeDto fileUpload(NoticeInsertDto noticeInsertDto) {
 		MultipartFile[] multipartFiles = noticeInsertDto.getNotice_file();
 		String filePath = context.getRealPath("/static/fileupload");
 		
@@ -102,11 +102,36 @@ public class NoticeServiceImpl implements NoticeService {
 		originName.delete(originName.length()-1, originName.length());
 		tempName.delete(tempName.length()-1, tempName.length());
 		
-		System.out.println(originName.toString());
-		System.out.println(tempName.toString());
+		NoticeDto noticeDto = new NoticeDto();
+		noticeDto.setOriginFileNames(originName.toString());
+		noticeDto.setTempFileNames(tempName.toString());
 		
+		return noticeDto;
+	}
+	
+	@Override
+	public int noticeInsert(NoticeInsertDto noticeInsertDto) {
+		NoticeDto noticeDto = fileUpload(noticeInsertDto);
+		noticeDto.setNotice_code(getNoticeMaxCode() + 1);
+		noticeDto.setNotice_title(noticeInsertDto.getNotice_title());
+		noticeDto.setNotice_writer(noticeInsertDto.getNotice_writer());
+		noticeDto.setNotice_content(noticeInsertDto.getNotice_content());
 		
-		return 1;
+		System.out.println(noticeDto);
+		int mstInsertFlag = noticeDao.noticeMstInsert(noticeDto);
+		int dtlInsertFlag = 0;
+		
+		if(mstInsertFlag == 1) {
+			dtlInsertFlag = noticeDao.noticeDtlInsert(noticeDto);
+			return noticeDto.getNotice_code();
+		}
+		
+		return dtlInsertFlag;
+	}
+	
+	@Override
+	public int getNoticeMaxCode() {
+		return noticeDao.getNoticeMaxCode();
 	}
 }
 

@@ -12,7 +12,13 @@ function noticeInsert(){
 		processData: false,
 		contentType: false,
 		success: function(data){
-			alert("전송 성공");
+			if(data == 0){
+				alert('공지사항 등록에 실패하였습니다.');
+				location.href = 'notice?pageNumber=1';
+			}else{
+				alert('공지사항 등록이 완료되었습니다.');
+				location.href = 'notice-dtl?noticeCode=' + data;
+			}
 		},
 		error: function(){
 			alert("전송 실패");

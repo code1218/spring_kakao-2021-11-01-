@@ -11,5 +11,7 @@ public interface NoticeService {
 	public int parseIntPageNumber(String pageNumber);
 	public List<NoticeDto> getNoticeListAll();
 	public List<NoticeDto> getNoticeList(int pageNumber);
-	public int fileUpload(NoticeInsertDto noticeInsertDto);
+	public NoticeDto fileUpload(NoticeInsertDto noticeInsertDto);
+	public int noticeInsert(NoticeInsertDto noticeInsertDto);
+	public int getNoticeMaxCode();
 }
