@@ -41,7 +41,7 @@
                 <ul>
                 	<li>
                 		<c:forEach var="fileBean" items="${fileList }" varStatus="st">
-                			<a href="file-download?originFileName${fileBean.originFileName }&tempFileName=${fileBean.tempFileName }">
+                			<a href="file-download?originFileName=${fileBean.originFileName }&tempFileName=${fileBean.tempFileName }">
                 				${fileBean.originFileName }
                 			</a>
                 			<c:if test="${not st.last }">
@@ -58,7 +58,7 @@
                     <c:set var="admin_id" value="admin"></c:set>
 	            	<c:set var="admin_user" value="${login_user.user_email }"></c:set>
 	            	
-	           		<c:if test="${admin_id eq admin_user }">
+	           		<c:if test="${admin_id eq admin_user or notice.notice_writer eq login_user.user_name }">
                     	<button type="button" class="notice_update_button">수정</button>
                     	<button type="button" class="notice_delete_button">삭제</button>
                     </c:if>

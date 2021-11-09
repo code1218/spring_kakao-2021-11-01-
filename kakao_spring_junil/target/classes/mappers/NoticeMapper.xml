@@ -78,6 +78,31 @@
 		LIMIT
 			1;
 	</select>
+	
+	<update id="plusNoticeCount">
+		update
+			notice_mst
+		set
+			notice_count = notice_count + 1
+		where
+			notice_code = #{notice_code};
+	</update>
+	
+	<delete id="noticeMstDelete">
+		delete
+		from
+			notice_mst
+		where
+			notice_code = #{notice_code};
+	</delete>
+	
+	<delete id="noticeDtlDelete">
+		delete
+		from
+			notice_dtl
+		where
+			notice_code = #{notice_code};
+	</delete>
 </mapper>
 
 
