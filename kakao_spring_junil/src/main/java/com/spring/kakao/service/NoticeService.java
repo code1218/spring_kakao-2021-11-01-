@@ -14,4 +14,5 @@ public interface NoticeService {
 	public NoticeDto fileUpload(NoticeInsertDto noticeInsertDto);
 	public int noticeInsert(NoticeInsertDto noticeInsertDto);
 	public int getNoticeMaxCode();
+	public NoticeDto getNotice(String notice_code);
 }

@@ -35,4 +35,9 @@ public class NoticeDaoImpl implements NoticeDao {
 	public int noticeDtlInsert(NoticeDto noticeDto) {
 		return session.insert(NAME_SPACE + "noticeDtlInsert", noticeDto);
 	}
+	
+	@Override
+	public NoticeDto getNotice(int notice_code) {
+		return session.selectOne(NAME_SPACE + "getNotice", notice_code);
+	}
 }

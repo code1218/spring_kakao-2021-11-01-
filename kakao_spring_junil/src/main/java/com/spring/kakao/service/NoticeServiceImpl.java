@@ -133,6 +133,11 @@ public class NoticeServiceImpl implements NoticeService {
 	public int getNoticeMaxCode() {
 		return noticeDao.getNoticeMaxCode();
 	}
+	
+	@Override
+	public NoticeDto getNotice(String notice_code) {
+		return noticeDao.getNotice(Integer.parseInt(notice_code));
+	}
 }
 
 

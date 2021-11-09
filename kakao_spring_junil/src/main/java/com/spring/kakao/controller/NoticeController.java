@@ -72,7 +72,7 @@ public class NoticeController {
 	
 	@RequestMapping(value = "notice-dtl", method = RequestMethod.GET)
 	public String noticeDtlIndex(Model model, @RequestParam String notice_code) {
-		NoticeDto noticeDto = new NoticeDto();
+		NoticeDto noticeDto = noticeService.getNotice(notice_code);
 		
 		model.addAttribute("notice", noticeDto);
 		

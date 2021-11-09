@@ -52,13 +52,13 @@
                 	<ul class="nd_footer_next">
                         <li class="next_title">다음 글</li>
                         <c:if test="${notice.nextNotice_code ne 0}">
-                        	<a href="notice-dtl?code=${notice.nextNotice_code }"><li>${notice.nextNotice_title }</li></a>
+                        	<a href="notice-dtl?notice_code=${notice.nextNotice_code }"><li>${notice.nextNotice_title }</li></a>
                         </c:if>
                     </ul>
                     <ul class="nd_footer_pre">
                         <li class="pre_title">이전 글</li>
                         <c:if test="${notice.preNotice_code ne 0}">
-                        	<a href="notice-dtl?code=${notice.preNotice_code }"><li>${notice.preNotice_title }</li></a>
+                        	<a href="notice-dtl?notice_code=${notice.preNotice_code }"><li>${notice.preNotice_title }</li></a>
                     	</c:if>
                     </ul>
                 </div>

@@ -9,4 +9,5 @@ public interface NoticeDao {
 	public int getNoticeMaxCode();
 	public int noticeMstInsert(NoticeDto noticeDto);
 	public int noticeDtlInsert(NoticeDto noticeDto);
+	public NoticeDto getNotice(int notice_code);
 }
