@@ -17,7 +17,7 @@ function noticeInsert(){
 				location.href = 'notice?pageNumber=1';
 			}else{
 				alert('공지사항 등록이 완료되었습니다.');
-				location.href = 'notice-dtl?noticeCode=' + data;
+				location.href = 'notice-dtl?notice_code=' + data;
 			}
 		},
 		error: function(){

@@ -89,7 +89,6 @@ public class NoticeServiceImpl implements NoticeService {
 			
 			File file = new File(filePath, tempFile);
 			if(!file.exists()) {
-				file.mkdir();
 				file.mkdirs();
 			}
 			
@@ -117,13 +116,14 @@ public class NoticeServiceImpl implements NoticeService {
 		noticeDto.setNotice_writer(noticeInsertDto.getNotice_writer());
 		noticeDto.setNotice_content(noticeInsertDto.getNotice_content());
 		
-		System.out.println(noticeDto);
 		int mstInsertFlag = noticeDao.noticeMstInsert(noticeDto);
 		int dtlInsertFlag = 0;
 		
 		if(mstInsertFlag == 1) {
 			dtlInsertFlag = noticeDao.noticeDtlInsert(noticeDto);
-			return noticeDto.getNotice_code();
+			if(dtlInsertFlag == 1) {
+				return noticeDto.getNotice_code();
+			}
 		}
 		
 		return dtlInsertFlag;

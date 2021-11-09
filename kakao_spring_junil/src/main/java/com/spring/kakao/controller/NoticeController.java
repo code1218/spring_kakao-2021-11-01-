@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
+import com.spring.kakao.model.dto.NoticeDto;
 import com.spring.kakao.model.dto.NoticeInsertDto;
 import com.spring.kakao.model.dto.UserDto;
 import com.spring.kakao.service.NoticeService;
@@ -49,6 +50,13 @@ public class NoticeController {
 	
 	@RequestMapping(value = "notice-insert", method = RequestMethod.GET)
 	public String noticeInsertIndex(Model model, HttpServletRequest request) {
+		
+		HttpSession session = request.getSession();
+		
+		if(session.getAttribute("login_user") == null) {
+			return "redirect:sign-in";
+		}
+		
 		Date date = new Date();
 		model.addAttribute("now", date);
 		return "notice/notice_insert";
@@ -57,10 +65,18 @@ public class NoticeController {
 	@ResponseBody
 	@RequestMapping(value = "notice-insert", method = RequestMethod.POST)
 	public String noticeInsert(NoticeInsertDto noticeInsertDto) {
-		System.out.println(noticeInsertDto);
 		int insertFlag = 0;
 		insertFlag = noticeService.noticeInsert(noticeInsertDto);
 		return Integer.toString(insertFlag);
+	}
+	
+	@RequestMapping(value = "notice-dtl", method = RequestMethod.GET)
+	public String noticeDtlIndex(Model model, @RequestParam String notice_code) {
+		NoticeDto noticeDto = new NoticeDto();
+		
+		model.addAttribute("notice", noticeDto);
+		
+		return "notice/notice_dtl";
 	}
 }
 
