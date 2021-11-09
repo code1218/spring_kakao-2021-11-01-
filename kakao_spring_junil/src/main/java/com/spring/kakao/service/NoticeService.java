@@ -2,6 +2,7 @@ package com.spring.kakao.service;
 
 import java.util.List;
 
+import com.spring.kakao.model.beans.FileBean;
 import com.spring.kakao.model.beans.NoticeBean;
 import com.spring.kakao.model.dto.NoticeDto;
 import com.spring.kakao.model.dto.NoticeInsertDto;
@@ -15,4 +16,5 @@ public interface NoticeService {
 	public int noticeInsert(NoticeInsertDto noticeInsertDto);
 	public int getNoticeMaxCode();
 	public NoticeDto getNotice(String notice_code);
+	public List<FileBean> getFileList(NoticeDto noticeDto);
 }

@@ -35,13 +35,28 @@
                         <pre>${notice.notice_content }</pre>
                     </li>
                 </ul>
+                <ul>
+                	<li>첨부파일</li>
+                </ul>
+                <ul>
+                	<li>
+                		<c:forEach var="fileBean" items="${fileList }" varStatus="st">
+                			<a href="file-download?originFileName${fileBean.originFileName }&tempFileName=${fileBean.tempFileName }">
+                				${fileBean.originFileName }
+                			</a>
+                			<c:if test="${not st.last }">
+                				/
+                			</c:if>
+                		</c:forEach>
+                	</li>
+                </ul>
             </div>
             <div class="notice_dtl_footer">
                 <div class="nd_footer_buttons">
                     <button type="button" class="notice_list_button">목록</button>
                     
                     <c:set var="admin_id" value="admin"></c:set>
-	            	<c:set var="admin_user" value="${login_user.id }"></c:set>
+	            	<c:set var="admin_user" value="${login_user.user_email }"></c:set>
 	            	
 	           		<c:if test="${admin_id eq admin_user }">
                     	<button type="button" class="notice_update_button">수정</button>

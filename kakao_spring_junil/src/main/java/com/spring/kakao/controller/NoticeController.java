@@ -73,9 +73,9 @@ public class NoticeController {
 	@RequestMapping(value = "notice-dtl", method = RequestMethod.GET)
 	public String noticeDtlIndex(Model model, @RequestParam String notice_code) {
 		NoticeDto noticeDto = noticeService.getNotice(notice_code);
-		
+		System.out.println(noticeDto);
 		model.addAttribute("notice", noticeDto);
-		
+		model.addAttribute("fileList", noticeService.getFileList(noticeDto));
 		return "notice/notice_dtl";
 	}
 }

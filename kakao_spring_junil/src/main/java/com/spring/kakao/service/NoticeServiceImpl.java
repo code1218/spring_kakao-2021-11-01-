@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.StringTokenizer;
 import java.util.UUID;
 
 import javax.servlet.ServletContext;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.spring.kakao.model.beans.FileBean;
 import com.spring.kakao.model.beans.NoticeBean;
 import com.spring.kakao.model.dao.NoticeDao;
 import com.spring.kakao.model.dto.NoticeDto;
@@ -137,6 +139,28 @@ public class NoticeServiceImpl implements NoticeService {
 	@Override
 	public NoticeDto getNotice(String notice_code) {
 		return noticeDao.getNotice(Integer.parseInt(notice_code));
+	}
+	
+	@Override
+	public List<FileBean> getFileList(NoticeDto noticeDto) {
+		
+		if(noticeDto.getOriginFileNames() == null || noticeDto.getTempFileNames() == null) {
+			return null;
+		}
+		
+		List<FileBean> fileList = new ArrayList<FileBean>();
+		
+		StringTokenizer ofn = new StringTokenizer(noticeDto.getOriginFileNames(), ",");
+		StringTokenizer tfn = new StringTokenizer(noticeDto.getTempFileNames(), ",");
+		
+		while(ofn.hasMoreTokens()) {
+			FileBean fileBean = new FileBean();
+			fileBean.setOriginFileName(ofn.nextToken());
+			fileBean.setTempFileName(tfn.nextToken());
+			fileList.add(fileBean);
+		}
+		
+		return fileList;
 	}
 }
 
